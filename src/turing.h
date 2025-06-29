@@ -2,6 +2,7 @@
 #define TURING_H
 
 #define MAX_LINE_LENGTH 256
+#define MAX_INPUT_LEN 256
 #define MAX_TOKENS 5
 
 // This enum defines the directions the head of the machine can move in, which
@@ -30,13 +31,28 @@ typedef struct {
 
 int count_lines(FILE *file);
 
+// Parses the specified program file and stores its instructions in an array of
+// TuringInstructions
 bool parse_program(TuringInstruction *program, FILE *program_file);
 
+// Frees the memory we allocated for our "program" from memory
 void free_program(TuringInstruction *program, int count);
+
+// Parses the specified tape file and stores its symbols in a string
+char *parse_tape(FILE *tape_file);
 
 // We use this function, which receives an array of instructions, our "program",
 // to go from one instruction to the next, performing the machine head movements
 // and read/writes as required
-bool next_instruction(TuringMachine *machine, TuringInstruction *program);
+bool next_instruction(TuringMachine *machine, TuringInstruction *program,
+		      int count);
+
+bool startsWith(const char *str, const char *prefix);
+
+void trim_whitespace(char *str);
+
+void remove_whitespace(char *str);
+
+char *to_lowercase(char *str);
 
 #endif //TURING_H
