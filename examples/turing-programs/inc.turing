@@ -1,0 +1,3 @@
+# -*- mode: conf; -*-
+BEGIN 0 1 R HALT
+BEGIN 1 0 R BEGIN
