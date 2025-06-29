@@ -31,9 +31,9 @@ files that contain instructions for the Turing Machine to interpret:
 - Correct instruction has the format: `<CURRENT-STATE> <READ-SYMBOL> <WRITE-SYMBOL> <DIRECTION> <NEXT-STATE>`:
     - `<CURRENT-STATE>` is a sequence of non-space characters that represents the state in which this instruction is
       activated.
-    - `<READ-SYMBOL>` is a sequence of non-space characters that represents the symbol that is read by the head of the
+    - `<READ-SYMBOL>` is a non-space character that represents the symbol that is read by the head of the
       machine which along with a specific `<CURRENT-STATE>` activates the instruction.
-    - `<WRITE-SYMBOL>` is a sequence of non-space characters that represents the symbol that is written to the current
+    - `<WRITE-SYMBOL>` is a non-space character that represents the symbol that is written to the current
       cell on the tape when the instruction is activated.
     - `<DIRECTION>` is either symbol `L` or `R` which indicates the direction in which the head of the Turing Machine
       should step after executing the instruction.
@@ -99,9 +99,9 @@ arquivos que contêm instruções para a Máquina de Turing interpretar:
 
     * `<ESTADO-ATUAL>` é uma sequência de caracteres sem espaço que representa o estado no qual esta instrução é
       ativada.
-    * `<SÍMBOLO-LIDO>` é uma sequência de caracteres sem espaço que representa o símbolo lido pela cabeça da
-      máquina que, junto com um `<ESTADO-ATUAL>` específico, ativa a instrução.
-    * `<SÍMBOLO-ESCRITO>` é uma sequência de caracteres sem espaço que representa o símbolo escrito na célula
+    * `<SÍMBOLO-LIDO>` é um caractere diferente de espaço que representa o símbolo lido pela cabeça da
+      máquina que, com um `<ESTADO-ATUAL>` específico, ativa a instrução.
+    * `<SÍMBOLO-ESCRITO>` é um caractere diferente de espaço que representa o símbolo escrito na célula
       atual da fita quando a instrução é ativada.
     * `<DIREÇÃO>` é ou o símbolo `L` ou `R`, o qual indica a direção na qual a cabeça da Máquina de Turing
       deve se mover após executar a instrução.
