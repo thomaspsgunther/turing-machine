@@ -20,7 +20,7 @@ int main(int argc, char **argv)
 				printf("OPTIONS:\n");
 				printf("  --help|-h             print this help to stdout and exit with 0 exit code\n");
 				printf("  --state|-s=[STATE]    start from a specific initial state (default: BEGIN)\n");
-				printf("  --head|-h=[POSITION]  start from a specific head position (default: 0)\n");
+				printf("  --head|-p=[POSITION]  start from a specific head position (default: 0)\n");
 				printf("  --interactive|-i      execute the program interactively\n");
 				free(initial_state);
 				exit(EXIT_SUCCESS);
@@ -38,7 +38,7 @@ int main(int argc, char **argv)
 					}
 					token = strtok(nullptr, "=");
 				}
-			} else if (startsWith(argv[i], "-h") ||
+			} else if (startsWith(argv[i], "-p") ||
 				   startsWith(argv[i], "--head")) {
 				char *token = strtok(argv[i], "=");
 				while (token != nullptr) {

@@ -16,6 +16,12 @@ $ ninja
 $ ./turing_machine ../examples/turing-programs/add.turing ../examples/tapes/input-05.tape
 ```
 
+To view options:
+
+```console
+$ ./turing_machine --help
+```
+
 ### Turing File Format
 
 Turing files (examples are located in the [./examples/turing-programs/](./examples/turing-programs/) folder) are the
@@ -52,7 +58,7 @@ initial state of the Turing Machine tape.
 Execution process starts with
 
 - loading the provided tape file into the tape of the Virtual Turing Machine,
-- setting the head position to 0 (can be changed with flag `-h`),
+- setting the head position to 0 (can be changed with flag `-p`),
 - switch to the state `BEGIN` (can be changed with flag `-s`).
 
 Then on each iteration of execution the machine finds the first instruction with the matching `<CURRENT-STATE>` and
@@ -75,6 +81,12 @@ $ cd build
 $ cmake -G Ninja ..
 $ ninja
 $ ./turing_machine ../examples/turing-programs/add.turing ../examples/tapes/input-05.tape
+```
+
+Para visualizar opções:
+
+```console
+$ ./turing_machine --help
 ```
 
 ### Formato de Arquivo Turing
@@ -115,7 +127,7 @@ o estado inicial da fita da Máquina de Turing.
 O processo de execução começa com
 
 * carregando o arquivo de fita fornecido na fita da Máquina de Turing Virtual,
-* definindo a posição da cabeça para 0 (pode ser alterado com a flag `-h`),
+* definindo a posição da cabeça para 0 (pode ser alterado com a flag `-p`),
 * mudando para o estado `BEGIN` (pode ser alterado com a flag `-s`).
 
 Então, a cada iteração da execução, a máquina encontra a primeira instrução com `<ESTADO-ATUAL>` e
