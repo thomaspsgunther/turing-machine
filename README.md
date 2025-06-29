@@ -50,7 +50,7 @@ Tape files (examples are located in the [./examples/tapes/](./examples/tapes/) f
 initial state of the Turing Machine tape.
 
 - A tape file consists of sequence of symbols separated by any amount of whitespace characters.
-- Each symbol is a sequence of non-space characters that represents the symbol stored in the corresponding cell of the
+- Each symbol is a non-space character that represents the symbol stored in the corresponding cell of the
   Machine's tape.
 
 ### Execution Process
@@ -119,7 +119,7 @@ o estado inicial da fita da Máquina de Turing.
 
 * Um arquivo de fita consiste em uma sequência de símbolos separados por qualquer quantidade de caracteres de espaço em
   branco.
-* Cada símbolo é uma sequência de caracteres sem espaço que representa o símbolo armazenado na célula correspondente
+* Cada símbolo é um caractere diferente de espaço que representa o símbolo armazenado na célula correspondente
   da fita da Máquina.
 
 ### Processo de Execução
