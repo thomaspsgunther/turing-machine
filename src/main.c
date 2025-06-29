@@ -127,7 +127,7 @@ int main(int argc, char **argv)
 
 		symbols = malloc(MAX_INPUT_LEN);
 		if (symbols == nullptr) {
-			perror("Memory allocation for input failed.\n");
+			perror("ERROR: Memory allocation for input failed.\n");
 			free(initial_state);
 			free_program(program, count);
 			free(symbols);
@@ -136,7 +136,7 @@ int main(int argc, char **argv)
 		}
 
 		if (fgets(symbols, MAX_INPUT_LEN, stdin) == nullptr) {
-			fprintf(stderr, "Failed to read input.\n");
+			fprintf(stderr, "ERROR: Failed to read input.\n");
 			free(initial_state);
 			free_program(program, count);
 			free(symbols);
@@ -184,7 +184,7 @@ int main(int argc, char **argv)
 
 			symbols = malloc(MAX_INPUT_LEN);
 			if (symbols == nullptr) {
-				perror("Memory allocation for input failed.\n");
+				perror("ERROR: Memory allocation for input failed.\n");
 				free(initial_state);
 				free_program(program, count);
 				free(machine.symbols);
@@ -194,7 +194,8 @@ int main(int argc, char **argv)
 			}
 
 			if (fgets(symbols, MAX_INPUT_LEN, stdin) == nullptr) {
-				fprintf(stderr, "Failed to read input.\n");
+				fprintf(stderr,
+					"ERROR: Failed to read input.\n");
 				free(initial_state);
 				free_program(program, count);
 				free(machine.symbols);

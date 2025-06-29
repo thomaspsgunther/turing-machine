@@ -98,7 +98,7 @@ char *parse_tape(FILE *tape_file)
 
 	char *buffer = malloc(filesize + 1);
 	if (!buffer) {
-		perror("Memory allocation for tape failed\n");
+		perror("ERROR: Memory allocation for tape failed\n");
 		return nullptr;
 	}
 
