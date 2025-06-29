@@ -10,11 +10,14 @@ int count_lines(FILE *file)
 	int count = 0;
 	char buffer[MAX_LINE_LENGTH];
 	while (fgets(buffer, sizeof(buffer), file)) {
+		trim_whitespace(buffer);
+
 		// Ignore comments, which are indicated by lines starting with
 		// "#", and also empty lines
-		if (startsWith(buffer, "#") || startsWith(buffer, "\n")) {
+		if (startsWith(buffer, "#") || is_line_empty(buffer)) {
 			continue;
 		}
+
 		count++;
 	}
 	rewind(file);
@@ -28,13 +31,13 @@ bool parse_program(TuringInstruction *program, FILE *program_file)
 	char line[MAX_LINE_LENGTH];
 
 	while (fgets(line, sizeof(line), program_file)) {
+		trim_whitespace(line);
+
 		// Ignore comments, which are indicated by lines starting with
 		// "#", and also empty lines
-		if (startsWith(line, "#") || startsWith(line, "\n")) {
+		if (startsWith(line, "#") || is_line_empty(line)) {
 			continue;
 		}
-
-		trim_whitespace(line);
 
 		int token_count = 0;
 		char *tokens[MAX_TOKENS];
@@ -143,6 +146,16 @@ bool startsWith(const char *str, const char *prefix)
 		++str, ++prefix;
 
 	return *prefix == 0;
+}
+
+int is_line_empty(const char *line)
+{
+	for (int i = 0; line[i] != '\0'; i++) {
+		if (!isspace((unsigned char)line[i])) {
+			return 0;
+		}
+	}
+	return 1;
 }
 
 void trim_whitespace(char *str)

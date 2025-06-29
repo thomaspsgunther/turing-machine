@@ -49,6 +49,8 @@ bool next_instruction(TuringMachine *machine, TuringInstruction *program,
 
 bool startsWith(const char *str, const char *prefix);
 
+int is_line_empty(const char *line);
+
 void trim_whitespace(char *str);
 
 void remove_whitespace(char *str);
