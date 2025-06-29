@@ -148,14 +148,15 @@ bool startsWith(const char *str, const char *prefix)
 	return *prefix == 0;
 }
 
-int is_line_empty(const char *line)
+bool is_line_empty(const char *line)
 {
 	for (int i = 0; line[i] != '\0'; i++) {
 		if (!isspace((unsigned char)line[i])) {
-			return 0;
+			return false;
 		}
 	}
-	return 1;
+
+	return true;
 }
 
 void trim_whitespace(char *str)
