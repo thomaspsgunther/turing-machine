@@ -1,6 +1,8 @@
 #ifndef TURING_H
 #define TURING_H
 
+#include <stdio.h>
+
 #define MAX_LINE_LENGTH 256
 #define MAX_INPUT_LEN 256
 #define MAX_TOKENS 5

@@ -55,10 +55,15 @@ int main(int argc, char **argv)
 
 						if (errno == ERANGE) {
 							perror("ERROR: Overflow or underflow occurred with given initial head position\n");
-						} else if (*endptr != '\0') {
+							free(initial_state);
+							exit(EXIT_FAILURE);
+						}
+						if (*endptr != '\0') {
 							fprintf(stderr,
-								"ERROR: Invalid character after number: %s\n",
+								"ERROR: Invalid character after initial head position number: %s\n",
 								endptr);
+							free(initial_state);
+							exit(EXIT_FAILURE);
 						}
 					}
 					token = strtok(nullptr, "=");
