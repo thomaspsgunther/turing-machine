@@ -14,7 +14,7 @@ unsigned long count_lines(FILE *file)
 
 		// Ignore comments, which are indicated by lines starting with
 		// "#", and also empty lines
-		if (startsWith(buffer, "#") || is_line_empty(buffer)) {
+		if (starts_with(buffer, "#") || is_line_empty(buffer)) {
 			continue;
 		}
 
@@ -35,7 +35,7 @@ bool parse_program(TuringInstruction *program, FILE *program_file)
 
 		// Ignore comments, which are indicated by lines starting with
 		// "#", and also empty lines
-		if (startsWith(line, "#") || is_line_empty(line)) {
+		if (starts_with(line, "#") || is_line_empty(line)) {
 			continue;
 		}
 
@@ -149,7 +149,7 @@ bool next_instruction(TuringMachine *machine, TuringInstruction *program,
 	return false;
 }
 
-bool startsWith(const char *str, const char *prefix)
+bool starts_with(const char *str, const char *prefix)
 {
 	while (*prefix && *str == *prefix)
 		++str, ++prefix;

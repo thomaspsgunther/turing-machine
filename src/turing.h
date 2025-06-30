@@ -48,7 +48,7 @@ bool next_instruction(TuringMachine *machine, TuringInstruction *program,
 		      unsigned long count, bool debug,
 		      unsigned long step_count);
 
-bool startsWith(const char *str, const char *prefix);
+bool starts_with(const char *str, const char *prefix);
 
 bool is_line_empty(const char *line);
 

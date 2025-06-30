@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <errno.h>
 
 #include "turing.h"
 
@@ -15,7 +16,7 @@ int main(int argc, char **argv)
 	char *tape_input = nullptr;
 
 	for (int i = 1; i < argc; i++) {
-		if (startsWith(argv[i], "-")) {
+		if (starts_with(argv[i], "-")) {
 			if (strcmp(argv[i], "-h") == 0 ||
 			    strcmp(argv[i], "--help") == 0) {
 				printf("Usage: turing_machine [OPTIONS] <input.turing> <input.tape>\n");
@@ -31,27 +32,39 @@ int main(int argc, char **argv)
 			if (strcmp(argv[i], "-i") == 0 ||
 			    strcmp(argv[i], "--interactive") == 0) {
 				interactive = true;
-			} else if (startsWith(argv[i], "-s") ||
-				   startsWith(argv[i], "--state")) {
+			} else if (starts_with(argv[i], "-s") ||
+				   starts_with(argv[i], "--state")) {
 				char *token = strtok(argv[i], "=");
 				while (token != nullptr) {
-					if (!startsWith(token, "-")) {
+					if (!starts_with(token, "-")) {
 						free(initial_state);
 						initial_state = strdup(token);
 					}
 					token = strtok(nullptr, "=");
 				}
-			} else if (startsWith(argv[i], "-p") ||
-				   startsWith(argv[i], "--head")) {
+			} else if (starts_with(argv[i], "-p") ||
+				   starts_with(argv[i], "--head")) {
 				char *token = strtok(argv[i], "=");
 				while (token != nullptr) {
-					if (!startsWith(token, "-")) {
-						initial_head = atoi(token);
+					if (!starts_with(token, "-")) {
+						char *endptr;
+						errno = 0;
+
+						initial_head = strtol(
+							token, &endptr, 10);
+
+						if (errno == ERANGE) {
+							perror("ERROR: Overflow or underflow occurred with given initial head position\n");
+						} else if (*endptr != '\0') {
+							fprintf(stderr,
+								"ERROR: Invalid character after number: %s\n",
+								endptr);
+						}
 					}
 					token = strtok(nullptr, "=");
 				}
-			} else if (startsWith(argv[i], "-d") ||
-				   startsWith(argv[i], "--debug")) {
+			} else if (starts_with(argv[i], "-d") ||
+				   starts_with(argv[i], "--debug")) {
 				debug = true;
 			} else {
 				fprintf(stderr,
