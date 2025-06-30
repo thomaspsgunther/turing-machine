@@ -5,9 +5,9 @@
 
 #include "turing.h"
 
-int count_lines(FILE *file)
+unsigned long count_lines(FILE *file)
 {
-	int count = 0;
+	unsigned long count = 0;
 	char buffer[MAX_LINE_LENGTH];
 	while (fgets(buffer, sizeof(buffer), file)) {
 		trim_whitespace(buffer);
@@ -27,7 +27,7 @@ int count_lines(FILE *file)
 
 bool parse_program(TuringInstruction *program, FILE *program_file)
 {
-	int i = 0;
+	unsigned long i = 0;
 	char line[MAX_LINE_LENGTH];
 
 	while (fgets(line, sizeof(line), program_file)) {
@@ -39,7 +39,7 @@ bool parse_program(TuringInstruction *program, FILE *program_file)
 			continue;
 		}
 
-		int token_count = 0;
+		unsigned short token_count = 0;
 		char *tokens[MAX_TOKENS];
 		char *token = strtok(line, " ");
 		while (token != nullptr && token_count < MAX_TOKENS) {
@@ -82,9 +82,9 @@ bool parse_program(TuringInstruction *program, FILE *program_file)
 	return true;
 }
 
-void free_program(TuringInstruction *program, int count)
+void free_program(TuringInstruction *program, unsigned long count)
 {
-	for (int i = 0; i < count; i++) {
+	for (unsigned long i = 0; i < count; i++) {
 		free(program[i].current_state);
 		free(program[i].next_state);
 	}
@@ -111,9 +111,9 @@ char *parse_tape(FILE *tape_file)
 }
 
 bool next_instruction(TuringMachine *machine, TuringInstruction *program,
-		      int count, bool debug, int step_count)
+		      unsigned long count, bool debug, unsigned long step_count)
 {
-	for (int i = 0; i < count; i++) {
+	for (unsigned long i = 0; i < count; i++) {
 		if ((strcmp(machine->state, program[i].current_state) == 0) &&
 		    (machine->symbols[machine->head] ==
 		     program[i].symbol_read)) {
@@ -134,10 +134,10 @@ bool next_instruction(TuringMachine *machine, TuringInstruction *program,
 			machine->state = strdup(program[i].next_state);
 
 			if (debug) {
-				printf("STEP %d INFO:\n", step_count);
+				printf("STEP %lu INFO:\n", step_count);
 				printf("   MACHINE STATE: %s\n",
 				       machine->state);
-				printf("   MACHINE HEAD POSITION: %d\n",
+				printf("   MACHINE HEAD POSITION: %lu\n",
 				       machine->head);
 				printf("   TAPE: %s\n\n", machine->symbols);
 			}
@@ -212,7 +212,7 @@ char *to_lowercase(char *str)
 		return nullptr;
 	}
 	strcpy(buffer, str);
-	for (int i = 0; str[i] != '\0'; i++) {
+	for (unsigned long i = 0; str[i] != '\0'; i++) {
 		buffer[i] = tolower((unsigned char)str[i]);
 	}
 

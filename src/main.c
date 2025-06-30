@@ -8,9 +8,9 @@ int main(int argc, char **argv)
 {
 	bool interactive = false;
 	bool debug = false;
-	int step_count = 1;
+	unsigned long step_count = 1;
 	char *initial_state = strdup("BEGIN");
-	int initial_head = 0;
+	unsigned long initial_head = 0;
 	char *program_input = nullptr;
 	char *tape_input = nullptr;
 
@@ -103,7 +103,7 @@ int main(int argc, char **argv)
 		exit(EXIT_FAILURE);
 	}
 
-	const int count = count_lines(program_file);
+	const unsigned long count = count_lines(program_file);
 	TuringInstruction program[count];
 	if (!parse_program(program, program_file)) {
 		fprintf(stderr,

@@ -29,14 +29,14 @@ typedef struct {
 	char *state;
 } TuringMachine;
 
-int count_lines(FILE *file);
+unsigned long count_lines(FILE *file);
 
 // Parses the specified program file and stores its instructions in an array of
 // TuringInstructions
 bool parse_program(TuringInstruction *program, FILE *program_file);
 
 // Frees the memory we allocated for our "program" from memory
-void free_program(TuringInstruction *program, int count);
+void free_program(TuringInstruction *program, unsigned long count);
 
 // Parses the specified tape file and stores its symbols in a string
 char *parse_tape(FILE *tape_file);
@@ -45,7 +45,8 @@ char *parse_tape(FILE *tape_file);
 // to go from one instruction to the next, performing the machine head movements
 // and read/writes as required
 bool next_instruction(TuringMachine *machine, TuringInstruction *program,
-		      int count, bool debug, int step_count);
+		      unsigned long count, bool debug,
+		      unsigned long step_count);
 
 bool startsWith(const char *str, const char *prefix);
 
