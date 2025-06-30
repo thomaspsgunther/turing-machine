@@ -7,6 +7,8 @@
 int main(int argc, char **argv)
 {
 	bool interactive = false;
+	bool debug = false;
+	int step_count = 1;
 	char *initial_state = strdup("BEGIN");
 	int initial_head = 0;
 	char *program_input = nullptr;
@@ -22,6 +24,7 @@ int main(int argc, char **argv)
 				printf("  --state|-s=[STATE]    start from a specific initial state (default: BEGIN)\n");
 				printf("  --head|-p=[POSITION]  start from a specific head position (default: 0)\n");
 				printf("  --interactive|-i      execute the program interactively\n");
+				printf("  --debug|-d            print extra info during program execution\n");
 				free(initial_state);
 				exit(EXIT_SUCCESS);
 			}
@@ -47,6 +50,9 @@ int main(int argc, char **argv)
 					}
 					token = strtok(nullptr, "=");
 				}
+			} else if (startsWith(argv[i], "-d") ||
+				   startsWith(argv[i], "--debug")) {
+				debug = true;
 			} else {
 				fprintf(stderr,
 					"ERROR: Unknown argument provided\n");
@@ -171,12 +177,13 @@ int main(int argc, char **argv)
 
 	free(symbols);
 
-	printf("Original tape:\n%s\n\n", machine.symbols);
+	printf("ORIGINAL TAPE:\n%s\n\n", machine.symbols);
 
-	while (next_instruction(&machine, program, count)) {
+	while (next_instruction(&machine, program, count, debug, step_count)) {
+		++step_count;
 	}
 
-	printf("Post computation tape:\n%s\n\n", machine.symbols);
+	printf("POST COMPUTATION TAPE:\n%s\n\n", machine.symbols);
 
 	if (interactive) {
 		while (1) {
@@ -228,12 +235,15 @@ int main(int argc, char **argv)
 			machine.head = initial_head;
 			machine.state = strdup(initial_state);
 
-			printf("Original tape:\n%s\n\n", machine.symbols);
+			printf("ORIGINAL TAPE:\n%s\n\n", machine.symbols);
 
-			while (next_instruction(&machine, program, count)) {
+			step_count = 1;
+			while (next_instruction(&machine, program, count, debug,
+						step_count)) {
+				++step_count;
 			}
 
-			printf("Post computation tape:\n%s\n\n",
+			printf("POST COMPUTATION TAPE:\n%s\n\n",
 			       machine.symbols);
 		}
 	}

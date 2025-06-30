@@ -45,7 +45,7 @@ char *parse_tape(FILE *tape_file);
 // to go from one instruction to the next, performing the machine head movements
 // and read/writes as required
 bool next_instruction(TuringMachine *machine, TuringInstruction *program,
-		      int count);
+		      int count, bool debug, int step_count);
 
 bool startsWith(const char *str, const char *prefix);
 

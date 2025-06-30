@@ -111,7 +111,7 @@ char *parse_tape(FILE *tape_file)
 }
 
 bool next_instruction(TuringMachine *machine, TuringInstruction *program,
-		      int count)
+		      int count, bool debug, int step_count)
 {
 	for (int i = 0; i < count; i++) {
 		if ((strcmp(machine->state, program[i].current_state) == 0) &&
@@ -132,6 +132,15 @@ bool next_instruction(TuringMachine *machine, TuringInstruction *program,
 			}
 			free(machine->state);
 			machine->state = strdup(program[i].next_state);
+
+			if (debug) {
+				printf("STEP %d INFO:\n", step_count);
+				printf("   MACHINE STATE: %s\n",
+				       machine->state);
+				printf("   MACHINE HEAD POSITION: %d\n",
+				       machine->head);
+				printf("   TAPE: %s\n\n", machine->symbols);
+			}
 
 			return true;
 		}
